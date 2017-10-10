@@ -6,6 +6,8 @@ const api = new API()
 
 export default () => {
   return (dispatch) => {
+    api.app.authenticate()
+      .then(() => {
     const backend = api.service('students')
     backend.find()
     .then((result) => {
@@ -17,6 +19,7 @@ export default () => {
     })
     .catch((error) => {
       // error handling!
+    })
     })
   }
 }

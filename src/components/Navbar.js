@@ -15,6 +15,7 @@ class Navigation extends PureComponent {
   signOut(event) {
     event.preventDefault()
     this.props.signOut()
+    this.goHome()
   }
 
   signUp() {
@@ -30,10 +31,13 @@ class Navigation extends PureComponent {
     return (
       <AppBar
         title="Student evaluation"
+
         iconElementRight={signedIn ?
           <FlatButton label="Sign out" onClick={this.signOut.bind(this)} /> :
           <FlatButton label="Sign up" onClick={this.signUp.bind(this)} />
+
         }
+
       />
     )
   }
@@ -43,4 +47,4 @@ class Navigation extends PureComponent {
     signedIn: (!!currentUser && !!currentUser._id)
   })
 
-export default connect(mapStateToProps, { push })(Navigation)
+export default connect(mapStateToProps, { push, signOut })(Navigation)
