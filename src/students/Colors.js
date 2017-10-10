@@ -11,9 +11,14 @@ class Colors extends PureComponent {
     const { days } = this.props
     {console.log("yeeeeej",days)}
     return(
-      <h1 className="Title">{ this.props.days[0].color }</h1>
+
     )
   }
 }
 
-export default Colors
+const mapStateToProps = ({ students }) => {
+  const CurrentStudent 
+}
+// const mapDispatchToProps = { fetchStudents}
+
+export default connect(mapStateToProps, { fetchStudents })(Colors)
