@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/theme'
 import StudentsContainer from './students/StudentsContainer.js'
+// import Navbar from './components/Navbar.js'
 import './App.css'
 
 class App extends Component {
@@ -19,8 +20,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="App">
-          test
-          <StudentsContainer/>
+           { this.props.children }
         </div>
       </MuiThemeProvider>
     )
