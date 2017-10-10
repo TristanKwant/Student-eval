@@ -21,7 +21,7 @@ export class Student extends PureComponent {
       <article className="RecipeItem">
         <header>
 
-          hell
+          
           <h1>
             <Link to={`/students/${_id}`}>{ name }</Link>
           </h1>
