@@ -9,6 +9,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, Route, IndexRoute } from 'react-router'
 import store, { history } from './store'
 import StudentPage from './students/StudentPage.js'
+import signUp from './users/signUp'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -16,6 +17,7 @@ ReactDOM.render(
     <Route path="/" component={App}>
       <IndexRoute component={StudentsContainer} />
       <Route path="/students/:studentId" component={StudentPage} />
+      <Route path="/sign-up" component={signUp} />
     </Route>
     </Router>
   </Provider>,

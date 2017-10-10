@@ -45,7 +45,7 @@ const mapStateToProps = ({ students }, { params }) => {
   }, {})
 
   return {
-    student,
+    students,
     ...student
   }
 
