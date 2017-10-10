@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-
+import { connect } from 'react-redux'
 
 class Colors extends PureComponent {
   static propTypes = { // eslint-disable-line no-undef
@@ -8,17 +8,17 @@ class Colors extends PureComponent {
   }
 
   render() {
-    const { days } = this.props
-    {console.log("yeeeeej",days)}
+    const { student } = this.props
+    console.log("yeeeeej",student)
     return(
-
+      <div></div>
     )
   }
 }
 
-const mapStateToProps = ({ students }) => {
-  const CurrentStudent 
+const mapStateToProps = ({ students }, { params }) => {
+
 }
 // const mapDispatchToProps = { fetchStudents}
 
-export default connect(mapStateToProps, { fetchStudents })(Colors)
+export default connect(mapStateToProps)(Colors)
