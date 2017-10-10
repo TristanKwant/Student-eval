@@ -22,15 +22,17 @@ class StudentPage extends PureComponent {
     )
   }
 
+
+
   render() {
-    const { name, batch, days } = this.props
+    const { name, batch, students } = this.props
 
     return(
       <div className="recipe page">
         <h1> {name}</h1>
         <h1> {batch}</h1>
-        <div>{ this.props.days.map(this.renderColors.bind(this)) } </div>
-        {console.log(days)}
+
+        {console.log(students)}
       </div>
     )
   }
@@ -52,3 +54,4 @@ const mapStateToProps = ({ students }, { params }) => {
 }
 
 export default connect(mapStateToProps, { fetchStudents })(StudentPage)
+// <div>{ this.props.days.map(this.renderColors.bind(this)) } </div>
