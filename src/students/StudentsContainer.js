@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fetchStudents from '../actions/students/fetch.js'
-import { Link } from 'react-router'
 import Student from './Student.js'
 
 class StudentsContainer extends Component {
