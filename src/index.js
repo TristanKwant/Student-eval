@@ -13,6 +13,7 @@ import StudentPage from './students/StudentPage.js'
 import BatchPage from './batches/BatchPage.js'
 import signUp from './users/signUp'
 import signIn from './users/signIn'
+import NewBatchPage from './batches/NewBatchPage.js'
 // import { persistStore, autoRehydrate } from 'redux-persist'
 
 
@@ -26,6 +27,7 @@ ReactDOM.render(
       <Route path="/sign-in" component={signIn} />
       <Route path="/students" component={StudentsContainer} />
       <Route path="/batch/:batchId" component={ BatchPage } />
+      <Route path="/new-batch" component={ NewBatchPage } />
     </Route>
     </Router>
   </Provider>,
