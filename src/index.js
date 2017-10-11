@@ -10,8 +10,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, Route, IndexRoute } from 'react-router'
 import store, { history } from './store'
 import StudentPage from './students/StudentPage.js'
+import BatchPage from './batches/BatchPage.js'
 import signUp from './users/signUp'
 import signIn from './users/signIn'
+// import { persistStore, autoRehydrate } from 'redux-persist'
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -22,6 +25,7 @@ ReactDOM.render(
       <Route path="/sign-up" component={signUp} />
       <Route path="/sign-in" component={signIn} />
       <Route path="/students" component={StudentsContainer} />
+      <Route path="/batch/:batchId" component={ BatchPage } />
     </Route>
     </Router>
   </Provider>,

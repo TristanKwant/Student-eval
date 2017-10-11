@@ -15,13 +15,13 @@ export class Student extends PureComponent {
 
 
   render() {
-    const { _id, name } = this.props
+    const { _id, name, photo } = this.props
 
     return(
       <article className="RecipeItem">
         <header>
 
-          
+          <img src={photo} width="200" alt="this"/>
           <h1>
             <Link to={`/students/${_id}`}>{ name }</Link>
           </h1>

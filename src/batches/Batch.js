@@ -7,7 +7,7 @@ import { Link } from 'react-router'
 
 
 
-export class Student extends PureComponent {
+export class Batch extends PureComponent {
   static propTypes = {
     _id: PropTypes.string.isRequired,
 
@@ -15,15 +15,15 @@ export class Student extends PureComponent {
 
 
   render() {
-    const { _id, name } = this.props
+    const { _id, number } = this.props
 
     return(
       <article className="RecipeItem">
         <header>
 
-          student
+          
           <h1>
-            <Link to={`/students/${_id}`}>{ name }</Link>
+            <Link to={`/batch/${_id}`}>{ number }</Link>
           </h1>
 
 
@@ -35,6 +35,6 @@ export class Student extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ students }) => ({ students })
+const mapStateToProps = ({ batch }) => ({ batch })
 
-export default connect(mapStateToProps, { Student })(Student)
+export default connect(mapStateToProps,)(Batch)

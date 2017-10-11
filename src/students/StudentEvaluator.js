@@ -4,11 +4,12 @@ import toMarkdown from 'to-markdown'
 import { connect } from 'react-redux'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
+import updateStudentEval from '../actions/students/eval'
 
 
 const TYPES = [
   'green',
-  'yelow',
+  'yellow',
   'red'
 ]
 
@@ -25,7 +26,11 @@ class StudentEvaluator extends PureComponent {
     }
   }
 
+componentWillMount(){
 
+
+
+}
 
 
 
@@ -37,6 +42,7 @@ class StudentEvaluator extends PureComponent {
 
 
   setType(event) {
+    // console.log(event.target.value ===)
     this.setState({
       green: event.target.value === 'green',
       yellow: event.target.value === 'yellow',
@@ -45,6 +51,8 @@ class StudentEvaluator extends PureComponent {
   }
 
   saveEvaluation() {
+    const { content } = this.props
+    console.log("student",content)
     const {
       green,
       yellow,
@@ -58,10 +66,22 @@ class StudentEvaluator extends PureComponent {
       red,
     }
 
+     this.props.save(content, evaluation)
+
     console.log(evaluation)
+
+    this.setState({
+
+      green: null,
+      yellow: null,
+      red: null
+    })
   }
 
   render() {
+    const { content } = this.props
+    console.log("props",this.props)
+    console.log("id", content)
     return (
       <div className="editor">
 
@@ -83,6 +103,7 @@ class StudentEvaluator extends PureComponent {
           </label>
         })}
 
+
         <div className="actions">
           <button className="primary" onClick={this.saveEvaluation.bind(this)}>Save</button>
         </div>
@@ -91,4 +112,8 @@ class StudentEvaluator extends PureComponent {
   }
 }
 
-export default StudentEvaluator
+const mapDispatchToProps = { save: updateStudentEval }
+
+const mapStateToProps = ({ _id }) => ({ _id })
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentEvaluator)
