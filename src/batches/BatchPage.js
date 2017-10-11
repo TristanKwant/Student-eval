@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import fetchBatch from '../actions/batch/fetch.js'
 import Student from '../students/Student.js'
 import fetchStudents from '../actions/students/fetch'
+import { Link } from 'react-router'
 
 class BatchPage extends PureComponent {
   static propTypes = {
@@ -25,7 +26,7 @@ class BatchPage extends PureComponent {
   // }
   renderStudents(student, index) {
     const { thebatch } = this.props
-    
+
     if (student.batch == thebatch.number) {
       return <Student key={index} { ...student }/>
     }
@@ -40,6 +41,9 @@ class BatchPage extends PureComponent {
       <div className="recipe page">
         <h1> {this.props.number}</h1>
         { this.props.students.map(this.renderStudents.bind(this)) }
+        <div>
+        <button className="primary" ><Link to={`/new-student`}>add Student</Link></button>
+        </div>
       </div>
     )
   }
