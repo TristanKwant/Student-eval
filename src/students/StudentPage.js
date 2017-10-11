@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fetchStudents from '../actions/students/fetch'
-
+import StudentEvaluator from './StudentEvaluator'
 
 class StudentPage extends PureComponent {
   static propTypes = {
@@ -15,9 +15,9 @@ class StudentPage extends PureComponent {
     }
 
   renderColors(day, index){
-    console.log("day",day[0].color)
+    console.log("day",day.color)
     return (
-      <h1>{day[0].color}</h1>
+      <h1>{day.color}</h1>
 
     )
   }
@@ -25,14 +25,15 @@ class StudentPage extends PureComponent {
 
 
   render() {
-    const { name, batch, students } = this.props
+    const { name, batch, photo } = this.props
 
     return(
       <div className="recipe page">
+        <img src={photo} width="200" alt="this"/>
         <h1> {name}</h1>
         <h1> {batch}</h1>
-
-        {console.log(students)}
+        <StudentEvaluator />
+        {console.log(photo)}
       </div>
     )
   }
