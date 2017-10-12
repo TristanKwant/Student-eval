@@ -25,8 +25,8 @@ class BatchContainer extends Component {
     return (
       <div>
         { this.props.batch.map(this.renderStudents.bind(this)) }
-        <div>
-        <button className="primary" ><Link to={`/new-batch`}>make new batch</Link></button>
+        <div >
+          <button className="primary" ><Link to={`/new-batch`}>make new batch</Link></button>
         </div>
       </div>
 

@@ -7,6 +7,7 @@ import 'medium-editor/dist/css/themes/default.css'
 import updateStudentEval from '../actions/students/eval'
 import { history } from '../store'
 import findBatch from '../actions/batch/findBatch'
+import RaisedButton from 'material-ui/RaisedButton'
 
 const TYPES = [
   'green',
@@ -110,7 +111,7 @@ class StudentEvaluator extends PureComponent {
 
 
         <div className="actions">
-          <button className="primary" onClick={this.saveEvaluation.bind(this)}>Save</button>
+          <RaisedButton label="save" onClick={this.saveEvaluation.bind(this)}/>
         </div>
       </div>
     )

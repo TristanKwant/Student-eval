@@ -14,6 +14,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
+    width: 200
   },
   gridList: {
     width: 800,
@@ -73,12 +74,12 @@ export class Student extends PureComponent {
             <img src={photo} width="200" alt="this"/>
           </GridTile>
 
+            <div className="colorstudent" style={this.renderColor()}>
 
+            </div>
 
           </div>
-          <div className="colorstudent" style={this.renderColor()}>
 
-          </div>
         </div>
 
 

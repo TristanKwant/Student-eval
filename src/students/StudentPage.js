@@ -6,6 +6,8 @@ import StudentEvaluator from './StudentEvaluator'
 import subscribeToStudentService from '../actions/students/subscribe'
 import NewStudentPage from './NewStudentPage'
 import deleteStudent from '../actions/students/deleteStudent'
+import './StudentPage.css'
+import FlatButton from 'material-ui/FlatButton'
 
 class StudentPage extends PureComponent {
   static propTypes = {
@@ -36,23 +38,48 @@ class StudentPage extends PureComponent {
     this.props.deleteStudent(student._id, currentBatch[0]._id)
   }
 
+  renderColor(){
+    const { student } = this.props
+
+    if(student.currentColor === "red"){
+      return {backgroundColor: 'red'}
+    }
+
+    if(student.currentColor === "green"){
+      return {backgroundColor: 'green'}
+    }
+
+    if(student.currentColor === "yellow"){
+      return {backgroundColor: 'yellow'}
+    }
+
+
+
+  }
+
 
   render() {
     const {  student } = this.props
 
     return(
-      <div className="recipe page">
-        <img src={student.photo} width="200" alt="this"/>
-        <h1> {student.name}</h1>
-        <h1> {student.batch}</h1>
-        <h1>{console.log("hellooo",student.days)}</h1>
-        <h1>{student.currentColor}</h1>
-        <StudentEvaluator content={ student }/>
-        < NewStudentPage {...student }/>
-        <div className="actions">
-          <button className="primary" onClick={this.deleteThisStudent.bind(this)}>Destorrrrrry</button>
+      <div className="student-page">
+
+        <div className="img-container">
+          <img src={student.photo}  alt="this"/>
         </div>
-        {console.log(student.photo)}
+        <div className="colorstudent-detail" style={this.renderColor()}>
+
+        </div>
+        <h1> {student.name}</h1>
+        <h1> batch: {student.batch}</h1>
+
+        <StudentEvaluator content={ student }/>
+        <hr/>
+        < NewStudentPage {...student }/>
+        <hr/>
+        <div className="actions">
+          <FlatButton label="delete student" onClick={this.deleteThisStudent.bind(this)}/>
+        </div>
       </div>
     )
   }

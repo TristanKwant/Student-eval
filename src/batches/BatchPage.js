@@ -10,6 +10,7 @@ import randomStudentAction from '../actions/students/randomStudent'
 import { Link } from 'react-router'
 import RandomStudent from '../students/RandomStudent.js'
 import './BatchPage.css'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class BatchPage extends PureComponent {
   static propTypes = {
@@ -157,18 +158,18 @@ renderRandom(pickedstudent){
       <div className="recipe page">
         <h1> {thebatch.number}</h1>
         <div className="actions">
-          <button className="primary" onClick={() => this.randomStudent(thebatch.number)}>Ask a question</button>
+          <RaisedButton label="Ask a question" onClick={() => this.randomStudent(thebatch.number)}/>
         </div>
         <RandomStudent />
         <h1>students</h1>
-        <div>
-        <div className="studentsgrid">
-        { this.props.students.map(this.renderStudents.bind(this)) }
-        </div>
+        <div className="students-container">
+          <div className="studentsgrid">
+          { this.props.students.map(this.renderStudents.bind(this)) }
+          </div>
         </div>
 
         <div>
-        <button className="primary" ><Link to={`/new-student`}>add Student</Link></button>
+        <RaisedButton label={<Link to={`/new-student`}>add Student</Link>}/>
         </div>
       </div>
     )
