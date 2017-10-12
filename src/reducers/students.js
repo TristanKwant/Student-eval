@@ -21,8 +21,8 @@ export default (state = [], { type, payload } = {}) => {
         case FETCHED_BATCH_STUDENTS :
           return [].concat(payload)
 
-        case RANDOM_STUDENT:
-        return [].concat(payload)
+        // case RANDOM_STUDENT:
+        // return [].concat(payload)
     default:
       return state
 

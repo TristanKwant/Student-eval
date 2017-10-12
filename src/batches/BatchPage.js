@@ -7,6 +7,7 @@ import fetchStudents from '../actions/students/fetch'
 import fetchRandomStudent from '../actions/students/fetchRandomStudent'
 import randomStudentAction from '../actions/students/randomStudent'
 import { Link } from 'react-router'
+import RandomStudent from '../students/RandomStudent.js'
 
 class BatchPage extends PureComponent {
   static propTypes = {
@@ -19,13 +20,6 @@ class BatchPage extends PureComponent {
       this.props.fetchStudents()
     }
 
-  // renderColors(day, index){
-  //   console.log("day",day.color)
-  //   return (
-  //     <h1>{day.color}</h1>
-  //
-  //   )
-  // }
   renderStudents(student, index) {
     const { thebatch } = this.props
 
@@ -49,7 +43,7 @@ class BatchPage extends PureComponent {
   checkIfEmpty(batchStudents, color){
   //  console.log("studentje", student.currentColor)
   var rednr = 0
-  const red = batchStudents.map((student) =>{
+  batchStudents.map((student) =>{
 
     if (student.currentColor === "red") {
       return rednr ++
@@ -58,7 +52,7 @@ class BatchPage extends PureComponent {
   })
 
   var greennr = 0
-  const green = batchStudents.map((student) =>{
+  batchStudents.map((student) =>{
 
     if (student.currentColor === "green") {
       return greennr ++
@@ -67,7 +61,7 @@ class BatchPage extends PureComponent {
   })
 
   var yellownr = 0
-  const yellow = batchStudents.map((student) =>{
+  batchStudents.map((student) =>{
 
     if (student.currentColor === "yellow") {
       return yellownr ++
@@ -153,7 +147,7 @@ renderRandom(pickedstudent){
 
 
   render() {
-    const { thebatch } = this.props
+    const { thebatch, randomStudent } = this.props
     // console.log(thebatch.students)
     return(
       <div className="recipe page">
@@ -161,6 +155,8 @@ renderRandom(pickedstudent){
         <div className="actions">
           <button className="primary" onClick={() => this.randomStudent(thebatch.number)}>Ask a question</button>
         </div>
+        <RandomStudent />
+        <h1>students</h1>
         { this.props.students.map(this.renderStudents.bind(this)) }
         <div>
         <button className="primary" ><Link to={`/new-student`}>add Student</Link></button>
@@ -170,7 +166,7 @@ renderRandom(pickedstudent){
   }
 }
 
-const mapStateToProps = ({ batch, students }, { params }) => {
+const mapStateToProps = ({ batch, students, randomStudent }, { params }) => {
 
   const thebatch = batch.reduce((prev, next) => {
     if (next._id === params.batchId) {
@@ -181,7 +177,8 @@ const mapStateToProps = ({ batch, students }, { params }) => {
 
   return {
     students,
-    thebatch
+    thebatch,
+    randomStudent
   }
 
 }

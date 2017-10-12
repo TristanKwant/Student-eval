@@ -15,7 +15,7 @@ export class Student extends PureComponent {
 
 
   render() {
-    const { _id, name, photo } = this.props
+    const { _id, name, photo, currentColor } = this.props
 
     return(
       <article className="RecipeItem">
@@ -25,6 +25,7 @@ export class Student extends PureComponent {
           <h1>
             <Link to={`/students/${_id}`}>{ name }</Link>
           </h1>
+          <h2>{currentColor} </h2>
 
 
         </header>
