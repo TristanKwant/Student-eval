@@ -9,6 +9,7 @@ import fetchRandomStudent from '../actions/students/fetchRandomStudent'
 import randomStudentAction from '../actions/students/randomStudent'
 import { Link } from 'react-router'
 import RandomStudent from '../students/RandomStudent.js'
+import './BatchPage.css'
 
 class BatchPage extends PureComponent {
   static propTypes = {
@@ -160,7 +161,12 @@ renderRandom(pickedstudent){
         </div>
         <RandomStudent />
         <h1>students</h1>
+        <div>
+        <div className="studentsgrid">
         { this.props.students.map(this.renderStudents.bind(this)) }
+        </div>
+        </div>
+
         <div>
         <button className="primary" ><Link to={`/new-student`}>add Student</Link></button>
         </div>
