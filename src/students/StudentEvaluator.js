@@ -26,14 +26,6 @@ class StudentEvaluator extends PureComponent {
     }
   }
 
-componentWillMount(){
-
-
-
-}
-
-
-
   updateIntro(text, medium) {
     this.setState({
       summary: text
