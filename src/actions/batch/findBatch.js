@@ -1,26 +1,24 @@
 import API from '../../api'
 
-export const FETCHED_STUDENTS = 'FETCHED_STUDENTS'
+export const FIND_BATCH = 'FIND_BATCH'
 
 const api = new API()
 
-export default () => {
+export default (batchNr) => {
+  console.log("find batch",batchNr)
   return (dispatch) => {
     api.app.authenticate()
       .then(() => {
-    const backend = api.service('students')
+    const backend = api.service('batch')
     backend.find({
       query: {
-        $limit: 50,
-        $sort: {
-          createdAt: -1
-        }
+        number: batchNr
       }
     })
     .then((result) => {
       console.log(result)
       dispatch({
-        type: FETCHED_STUDENTS,
+        type: FIND_BATCH,
         payload: result.data
       })
     })

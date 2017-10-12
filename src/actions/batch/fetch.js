@@ -9,7 +9,14 @@ export default () => {
     api.app.authenticate()
       .then(() => {
     const backend = api.service('batch')
-    backend.find()
+    backend.find({
+      query: {
+        $limit: 50,
+        $sort: {
+          createdAt: -1
+        }
+      }
+    })
     .then((result) => {
       console.log(result)
       dispatch({

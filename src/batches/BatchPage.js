@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fetchBatch from '../actions/batch/fetch.js'
+import resetBatch from '../actions/batch/resetBatch.js'
 import Student from '../students/Student.js'
 import fetchStudents from '../actions/students/fetch'
 import fetchRandomStudent from '../actions/students/fetchRandomStudent'
@@ -18,13 +19,15 @@ class BatchPage extends PureComponent {
   componentWillMount() {
       this.props.fetchBatch()
       this.props.fetchStudents()
+      this.props.resetBatch()
     }
+
 
   renderStudents(student, index) {
     const { thebatch } = this.props
 
     if (student.batch == thebatch.number) {
-      return <Student key={index} { ...student }/>
+      return <Student key={index} batch={ thebatch } { ...student }/>
     }
 
   }
@@ -182,6 +185,6 @@ const mapStateToProps = ({ batch, students, randomStudent }, { params }) => {
   }
 
 }
-const mapDispatchToProps = { fetchBatch, fetchStudents, fetchRandomStudent, randomStudentAction }
+const mapDispatchToProps = { fetchBatch, fetchStudents, fetchRandomStudent, randomStudentAction, resetBatch }
 export default connect(mapStateToProps, mapDispatchToProps)(BatchPage)
 // <div>{ this.props.days.map(this.renderColors.bind(this)) } </div>

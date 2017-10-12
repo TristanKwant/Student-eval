@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
 import updateStudentEval from '../actions/students/eval'
-
+import { history } from '../store'
+import findBatch from '../actions/batch/findBatch'
 
 const TYPES = [
   'green',
@@ -26,6 +27,16 @@ class StudentEvaluator extends PureComponent {
     }
   }
 
+  componentWillUpdate(){
+    const { content, currentBatch } = this.props
+    console.log(content.batch)
+    if (currentBatch.length === 0) {
+
+      this.props.findBatch(content.batch)
+    }
+
+  }
+
   updateIntro(text, medium) {
     this.setState({
       summary: text
@@ -43,8 +54,8 @@ class StudentEvaluator extends PureComponent {
   }
 
   saveEvaluation() {
-    const { content } = this.props
-    console.log("student",content)
+    const { content, currentBatch } = this.props
+    console.log("batchid:", currentBatch[0]._id)
     const {
       green,
       yellow,
@@ -58,7 +69,7 @@ class StudentEvaluator extends PureComponent {
       red,
     }
 
-     this.props.save(content, evaluation)
+     this.props.save(content._id, evaluation)
 
     console.log(evaluation)
 
@@ -68,12 +79,14 @@ class StudentEvaluator extends PureComponent {
       yellow: null,
       red: null
     })
+    // console.log(batch._id)
+    history.push(`/batch/${currentBatch[0]._id}`)
   }
 
   render() {
     const { content } = this.props
-    console.log("props",this.props)
-    console.log("id", content)
+
+
     return (
       <div className="editor">
 
@@ -104,8 +117,8 @@ class StudentEvaluator extends PureComponent {
   }
 }
 
-const mapDispatchToProps = { save: updateStudentEval }
+const mapDispatchToProps = { save: updateStudentEval, findBatch }
 
-const mapStateToProps = ({ _id }) => ({ _id })
+const mapStateToProps = ({ batch, currentBatch }) => ({ batch, currentBatch })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentEvaluator)
