@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import fetchStudents from '../actions/students/fetch'
 import StudentEvaluator from './StudentEvaluator'
 import subscribeToStudentService from '../actions/students/subscribe'
-
+import NewStudentPage from './NewStudentPage'
+import deleteStudent from '../actions/students/deleteStudent'
 
 class StudentPage extends PureComponent {
   static propTypes = {
@@ -29,6 +30,11 @@ class StudentPage extends PureComponent {
     )
   }
 
+  deleteThisStudent(){
+    const {  student, currentBatch } = this.props
+
+    this.props.deleteStudent(student._id, currentBatch[0]._id)
+  }
 
 
   render() {
@@ -42,13 +48,17 @@ class StudentPage extends PureComponent {
         <h1>{console.log("hellooo",student.days)}</h1>
         <h1>{student.currentColor}</h1>
         <StudentEvaluator content={ student }/>
+        < NewStudentPage {...student }/>
+        <div className="actions">
+          <button className="primary" onClick={this.deleteThisStudent.bind(this)}>Destorrrrrry</button>
+        </div>
         {console.log(student.photo)}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ students }, { params }) => {
+const mapStateToProps = ({ students, currentBatch }, { params }) => {
   const student = students.reduce((prev, next) => {
     if (next._id === params.studentId) {
       return next
@@ -59,10 +69,12 @@ const mapStateToProps = ({ students }, { params }) => {
   return {
     students,
     student,
+    currentBatch,
 
   }
 
 }
 
-export default connect(mapStateToProps, { fetchStudents, subscribeToStudentService })(StudentPage)
+
+export default connect(mapStateToProps, { fetchStudents, subscribeToStudentService, deleteStudent })(StudentPage)
 // <div>{ this.props.days.map(this.renderColors.bind(this)) } </div>

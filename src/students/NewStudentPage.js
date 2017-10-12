@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import createStudent from '../actions/students/createStudent'
+import editStudent from '../actions/students/editStudent'
 
-class BatchPage extends PureComponent {
+class NewStudentPage extends PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
 
@@ -11,7 +12,6 @@ class BatchPage extends PureComponent {
   constructor(props) {
     super()
 
-    const { number } = props
 
     this.state = {
       name: 0,
@@ -45,38 +45,54 @@ class BatchPage extends PureComponent {
       })
     }
 
-    saveStudent() {
+    saveOrEdit(){
 
 
-    const {
-      name,
-      batch,
-      photo
-    } = this.state
-
-    const student = {
-      name,
-      batch,
-      photo
     }
 
-     this.props.save(student)
-    console.log(student)
-  //   this.setState({
-  //     title: '',
-  //     summary: '',
-  //     photo: '',
-  //     vegetarian: null,
-  //     vegan: null,
-  //     pescatarian: null
-  //   })
- }
+    saveStudent() {
+      const { _id } =this.props
+      console.log("content", _id)
+      const {
+        name,
+        batch,
+        photo
+      } = this.state
+
+      const student = {
+        name,
+        batch,
+        photo
+      }
+      if ( _id === undefined) {
+        this.props.save(student)
+      } else {
+        this.props.edit( _id, student)
+      }
+
+
+
+   }
+
+   renderTitle(){
+     const { _id } =this.props
+     if ( _id === undefined) {
+       return <h1> add a student </h1>
+     } else {
+       return <h1> edit this student </h1>
+     }
+     return <h1> edit a student </h1>
+   }
+
+
 
   render() {
-
+    const { _id } =this.props
     return(
-      <div className="recipe page">
-        <h1>Add a student</h1>
+      <div className="student page">
+
+        {this.renderTitle()}
+
         <div className="form">
           <input
           type="text"
@@ -113,5 +129,5 @@ class BatchPage extends PureComponent {
 }
 
 
-const mapDispatchToProps = { save: createStudent }
-export default connect(null, mapDispatchToProps)(BatchPage)
+const mapDispatchToProps = { save: createStudent, edit: editStudent }
+export default connect(null, mapDispatchToProps)(NewStudentPage)
