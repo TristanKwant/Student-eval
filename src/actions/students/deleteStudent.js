@@ -1,8 +1,6 @@
 import API from '../../api'
-// import loading from '../loading'
-// import loadError from '../load-error'
-// import loadSuccess from '../load-success'
-import { history, replace } from '../../store'
+
+import { history } from '../../store'
 
 const api = new API()
 
@@ -10,7 +8,6 @@ const api = new API()
 export default (studentId, batchId) => {
   return (dispatch) => {
 
-    // dispatch(loading(true))
     console.log("delete")
     api.app.authenticate()
       .then(() => {
@@ -20,12 +17,11 @@ export default (studentId, batchId) => {
           history.replace(`/batch/${batchId}`)
         })
           .catch((error) => {
-            // dispatch(loading(false))
-            // dispatch(loadError(error))
+            console.log("ERRRRRORRR", error)
           })
       })
       .catch((error) => {
-        // dispatch(loadError({ message: 'You need to sign in first!' }))
+        console.log("ERRRRRORRR", error)
         history.push('/sign-in')
       })
 

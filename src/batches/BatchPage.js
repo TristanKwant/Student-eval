@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fetchBatch from '../actions/batch/fetch.js'
 import resetBatch from '../actions/batch/resetBatch.js'
@@ -9,12 +8,11 @@ import fetchRandomStudent from '../actions/students/fetchRandomStudent'
 import randomStudentAction from '../actions/students/randomStudent'
 import { Link } from 'react-router'
 import RandomStudent from '../students/RandomStudent.js'
+import './BatchPage.css'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class BatchPage extends PureComponent {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
 
-  }
 
   componentWillMount() {
       this.props.fetchBatch()
@@ -32,70 +30,48 @@ class BatchPage extends PureComponent {
 
   }
   randomStudent(batchNr){
-     const { students } = this.props
-    console.log(batchNr)
-    // this.props.fetchRandomStudent(batchNr)
+    const { students } = this.props
     const batchStudents = this.props.students.filter(function( student ) {
       return student.batch == batchNr;
     });
 
-    // console.log(batchStudents)
     this.pickStudent(batchStudents)
   }
 
   checkIfEmpty(batchStudents, color){
-  //  console.log("studentje", student.currentColor)
-  var rednr = 0
-  batchStudents.map((student) =>{
+    var rednr = 0
+    batchStudents.map((student) =>{
+      if (student.currentColor === "red") {
+        return rednr ++
+      }
+    })
 
-    if (student.currentColor === "red") {
-      return rednr ++
+    var greennr = 0
+    batchStudents.map((student) =>{
+      if (student.currentColor === "green") {
+        return greennr ++
+      }
+    })
+
+    var yellownr = 0
+    batchStudents.map((student) =>{
+      if (student.currentColor === "yellow") {
+        return yellownr ++
+      }
+    })
+
+    if (color === "red" && rednr === 0 ) {
+      this.pickStudent(batchStudents)
+    }
+    if (color === "yellow" && yellownr === 0) {
+      this.pickStudent(batchStudents)
+    }
+    if (color === "green" && greennr === 0) {
+      this.pickStudent(batchStudents)
     }
 
-  })
-
-  var greennr = 0
-  batchStudents.map((student) =>{
-
-    if (student.currentColor === "green") {
-      return greennr ++
-    }
-
-  })
-
-  var yellownr = 0
-  batchStudents.map((student) =>{
-
-    if (student.currentColor === "yellow") {
-      return yellownr ++
-    }
-
-  })
-
-  if (color === "red" && rednr === 0 ) {
-    this.pickStudent(batchStudents)
+    return batchStudents
   }
-  if (color === "yellow" && yellownr === 0) {
-    this.pickStudent(batchStudents)
-  }
-  if (color === "green" && greennr === 0) {
-    this.pickStudent(batchStudents)
-  }
-
-
-
-
-
-console.log("green", greennr)
-console.log("red", rednr)
- console.log("yellow", yellownr)
-  // if (students.length === 0) {
-  //   return this.pickStudent(students)
-  // } else {
-  //   return students
-  // }
-  return batchStudents
-}
 
 
   pickStudent(batchStudents){
@@ -153,16 +129,23 @@ renderRandom(pickedstudent){
     const { thebatch, randomStudent } = this.props
     // console.log(thebatch.students)
     return(
-      <div className="recipe page">
-        <h1> {thebatch.number}</h1>
-        <div className="actions">
-          <button className="primary" onClick={() => this.randomStudent(thebatch.number)}>Ask a question</button>
+      <div className="batch-page">
+        <h1> Batch : {thebatch.number}</h1>
+        <div className="randomStudent">
+          <RaisedButton label="Ask a question" onClick={() => this.randomStudent(thebatch.number)}/>
+          <RandomStudent />
         </div>
-        <RandomStudent />
-        <h1>students</h1>
-        { this.props.students.map(this.renderStudents.bind(this)) }
+
+
+        <div className="students-container">
+          <h1>students</h1>
+          <div className="studentsgrid">
+          { this.props.students.map(this.renderStudents.bind(this)) }
+          </div>
+        </div>
+
         <div>
-        <button className="primary" ><Link to={`/new-student`}>add Student</Link></button>
+        <RaisedButton label={<Link to={`/new-student`} >add Student</Link>}/>
         </div>
       </div>
     )

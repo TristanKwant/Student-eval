@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import createStudent from '../actions/students/createStudent'
 import editStudent from '../actions/students/editStudent'
+import RaisedButton from 'material-ui/RaisedButton'
+import { history } from '../store'
 
 class NewStudentPage extends PureComponent {
   static propTypes = {
@@ -23,9 +25,7 @@ class NewStudentPage extends PureComponent {
 
 
 
-  componentWillMount() {
 
-    }
 
     updateName(event) {
       this.setState({
@@ -66,6 +66,7 @@ class NewStudentPage extends PureComponent {
       }
       if ( _id === undefined) {
         this.props.save(student)
+        // history.push(`/batch/`)
       } else {
         this.props.edit( _id, student)
       }
@@ -77,17 +78,18 @@ class NewStudentPage extends PureComponent {
    renderTitle(){
      const { _id } =this.props
      if ( _id === undefined) {
-       return <h1> add a student </h1>
+       return <h3> add a student </h3>
      } else {
-       return <h1> edit this student </h1>
+       return <h3> edit this student </h3>
      }
-     return <h1> edit a student </h1>
+     return <h3> edit a student </h3>
    }
 
 
 
   render() {
     const { _id } =this.props
+
     return(
       <div className="student page">
 
@@ -119,7 +121,7 @@ class NewStudentPage extends PureComponent {
 
 
           <div className="actions">
-          <button className="primary" onClick={this.saveStudent.bind(this)}>Save</button>
+          <RaisedButton label="Save student" onClick={this.saveStudent.bind(this)}/>
         </div>
 
         </div>

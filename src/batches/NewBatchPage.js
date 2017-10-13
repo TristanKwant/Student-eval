@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import createBatch from '../actions/batch/createBatch'
+import { history } from '../store'
 
 class BatchPage extends PureComponent {
   static propTypes = {
@@ -10,8 +11,6 @@ class BatchPage extends PureComponent {
   }
   constructor(props) {
     super()
-
-    const { number } = props
 
     this.state = {
       number: 0
@@ -43,15 +42,8 @@ class BatchPage extends PureComponent {
     }
 
     this.props.save(batch)
-    console.log(batch)
-  //   this.setState({
-  //     title: '',
-  //     summary: '',
-  //     photo: '',
-  //     vegetarian: null,
-  //     vegan: null,
-  //     pescatarian: null
-  //   })
+    history.push('/')
+    
  }
 
   render() {
@@ -61,7 +53,7 @@ class BatchPage extends PureComponent {
         <h1>Make a new batch</h1>
         <div className="form">
           <input
-          type="text"
+          type="number"
           ref="photo"
           className="photo"
           placeholder="Batch number"

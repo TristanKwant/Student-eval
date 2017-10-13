@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-
+import './Batch.css'
 
 
 
@@ -18,12 +18,12 @@ export class Batch extends PureComponent {
     const { _id, number } = this.props
 
     return(
-      <article className="RecipeItem">
+      <article className="batches">
         <header>
 
-          
+
           <h1>
-            <Link to={`/batch/${_id}`}>{ number }</Link>
+            <Link to={`/batch/${_id}`}>Batch: { number }</Link>
           </h1>
 
 

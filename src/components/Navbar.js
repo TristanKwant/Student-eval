@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import signOut from '../actions/user/sign-out'
 import AppBar from 'material-ui/AppBar'
-
+import { Link } from 'react-router'
 import FlatButton from 'material-ui/FlatButton'
 
 class Navigation extends PureComponent {
@@ -30,7 +30,7 @@ class Navigation extends PureComponent {
     const { signedIn } = this.props
     return (
       <AppBar
-        title="Student evaluation"
+        title={<Link to={`/`}>student evaluator</Link>}
 
         iconElementRight={signedIn ?
           <FlatButton label="Sign out" onClick={this.signOut.bind(this)} /> :

@@ -1,0 +1,9 @@
+.student-page {
+  width: 40%;
+  margin: 0 auto; }
+  .student-page .img-container {
+    height: 300px;
+    width: 100%;
+    overflow: hidden; }
+    .student-page .img-container img {
+      width: 100%; }

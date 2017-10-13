@@ -8,6 +8,8 @@ import updateStudentEval from '../actions/students/eval'
 import { history } from '../store'
 import findBatch from '../actions/batch/findBatch'
 
+import RaisedButton from 'material-ui/RaisedButton'
+
 const TYPES = [
   'green',
   'yellow',
@@ -23,13 +25,14 @@ class StudentEvaluator extends PureComponent {
     this.state = {
       green,
       yellow,
-      red
+      red,
+      date: this.getDate()
     }
   }
 
   componentWillUpdate(){
     const { content, currentBatch } = this.props
-    console.log(content.batch)
+
     if (currentBatch.length === 0) {
 
       this.props.findBatch(content.batch)
@@ -38,14 +41,53 @@ class StudentEvaluator extends PureComponent {
   }
 
   updateIntro(text, medium) {
+    console.log(text)
     this.setState({
-      summary: text
+      comment: text
     })
   }
 
+  validateDate(){
+    const { content,} = this.props
+
+    const days =content.days.filter((day) =>{
+      if (day.day === this.state.date) {
+        return true
+      }
+        return false
+      })
+
+      if (days.length !== 0) {
+        return false
+      }else {
+        return true
+      }
+
+  }
+
+  validateComment() {
+    const { comment } = this.state
+    return comment && toMarkdown(comment).length > 2
+  }
+
+  validate() {
+    const isDateValid = this.validateDate()
+    const isCommentValid = this.validateComment()
+    return isDateValid && isCommentValid
+  }
+
+  updateDate(event){
+
+    this.setState({
+      date: event.target.value
+    })
+
+  }
+
+
 
   setType(event) {
-    // console.log(event.target.value ===)
+
     this.setState({
       green: event.target.value === 'green',
       yellow: event.target.value === 'yellow',
@@ -54,39 +96,56 @@ class StudentEvaluator extends PureComponent {
   }
 
   saveEvaluation() {
+    if (!this.validate()) return
     const { content, currentBatch } = this.props
-    console.log("batchid:", currentBatch[0]._id)
+
     const {
       green,
+      comment,
       yellow,
-      red
+      red,
+      date
     } = this.state
 
     const evaluation = {
-      green,
-      // summary: toMarkdown(summary),
-      yellow,
-      red,
-    }
+        green,
+        comment: toMarkdown(comment),
+        yellow,
+        red,
+        date
+      }
 
      this.props.save(content._id, evaluation)
 
-    console.log(evaluation)
 
-    this.setState({
+      this.setState({
 
-      green: null,
-      yellow: null,
-      red: null
-    })
-    // console.log(batch._id)
-    history.push(`/batch/${currentBatch[0]._id}`)
+        green: null,
+        yellow: null,
+        red: null
+      })
+      history.push(`/batch/${currentBatch[0]._id}`)
+    }
+
+  getDate(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd = '0'+dd
+    }
+
+    if(mm<10) {
+        mm = '0'+mm
+    }
+
+     return yyyy + '-' + mm + '-' + dd;
+
   }
 
   render() {
-    const { content } = this.props
-
-
     return (
       <div className="editor">
 
@@ -97,7 +156,18 @@ class StudentEvaluator extends PureComponent {
             placeholder: {text: 'Write an comment'}
           }}
           onChange={this.updateIntro.bind(this)}
-          text={this.state.summary} />
+          text={this.state.comment} />
+
+          <label>
+          evaluation date
+            <input
+            type="date"
+            ref="photo"
+            className="photo"
+            value={this.state.date}
+            onChange={this.updateDate.bind(this)}
+            />
+          </label>
 
 
 
@@ -110,7 +180,7 @@ class StudentEvaluator extends PureComponent {
 
 
         <div className="actions">
-          <button className="primary" onClick={this.saveEvaluation.bind(this)}>Save</button>
+          <RaisedButton label="save" onClick={this.saveEvaluation.bind(this)}/>
         </div>
       </div>
     )
