@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import createStudent from '../actions/students/createStudent'
 import editStudent from '../actions/students/editStudent'
 import RaisedButton from 'material-ui/RaisedButton'
+import { history } from '../store'
 
 class NewStudentPage extends PureComponent {
   static propTypes = {
@@ -24,9 +25,7 @@ class NewStudentPage extends PureComponent {
 
 
 
-  componentWillMount() {
 
-    }
 
     updateName(event) {
       this.setState({
@@ -67,6 +66,7 @@ class NewStudentPage extends PureComponent {
       }
       if ( _id === undefined) {
         this.props.save(student)
+        // history.push(`/batch/`)
       } else {
         this.props.edit( _id, student)
       }
@@ -89,6 +89,7 @@ class NewStudentPage extends PureComponent {
 
   render() {
     const { _id } =this.props
+
     return(
       <div className="student page">
 

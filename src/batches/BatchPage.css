@@ -5,3 +5,12 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: left; }
+
+.randomStudent {
+  text-align: center; }
+
+.students-container {
+  text-align: center; }
+
+.batch-page h1 {
+  text-align: center; }

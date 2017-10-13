@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Student from './Student'
-
+import './RandomStudent.css'
 
 
 export class RandomStudent extends PureComponent {
@@ -20,7 +20,7 @@ export class RandomStudent extends PureComponent {
       return null
     }
     return(
-      <div>
+      <div className="the-randomstudent">
         <h1>Ask a question</h1>
         <Student { ...randomStudent } />
       </div>

@@ -155,21 +155,23 @@ renderRandom(pickedstudent){
     const { thebatch, randomStudent } = this.props
     // console.log(thebatch.students)
     return(
-      <div className="recipe page">
-        <h1> {thebatch.number}</h1>
-        <div className="actions">
+      <div className="batch-page">
+        <h1> Batch : {thebatch.number}</h1>
+        <div className="randomStudent">
           <RaisedButton label="Ask a question" onClick={() => this.randomStudent(thebatch.number)}/>
+          <RandomStudent />
         </div>
-        <RandomStudent />
-        <h1>students</h1>
+
+
         <div className="students-container">
+          <h1>students</h1>
           <div className="studentsgrid">
           { this.props.students.map(this.renderStudents.bind(this)) }
           </div>
         </div>
 
         <div>
-        <RaisedButton label={<Link to={`/new-student`}>add Student</Link>}/>
+        <RaisedButton label={<Link to={`/new-student`} >add Student</Link>}/>
         </div>
       </div>
     )
