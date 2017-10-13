@@ -12,8 +12,6 @@ class BatchPage extends PureComponent {
   constructor(props) {
     super()
 
-    const { number } = props
-
     this.state = {
       number: 0
 
@@ -45,15 +43,7 @@ class BatchPage extends PureComponent {
 
     this.props.save(batch)
     history.push('/')
-    console.log(batch)
-  //   this.setState({
-  //     title: '',
-  //     summary: '',
-  //     photo: '',
-  //     vegetarian: null,
-  //     vegan: null,
-  //     pescatarian: null
-  //   })
+    
  }
 
   render() {

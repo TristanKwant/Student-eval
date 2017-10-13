@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fetchBatch from '../actions/batch/fetch.js'
 import resetBatch from '../actions/batch/resetBatch.js'
@@ -13,10 +12,7 @@ import './BatchPage.css'
 import RaisedButton from 'material-ui/RaisedButton'
 
 class BatchPage extends PureComponent {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
 
-  }
 
   componentWillMount() {
       this.props.fetchBatch()
@@ -34,70 +30,48 @@ class BatchPage extends PureComponent {
 
   }
   randomStudent(batchNr){
-     const { students } = this.props
-    console.log(batchNr)
-    // this.props.fetchRandomStudent(batchNr)
+    const { students } = this.props
     const batchStudents = this.props.students.filter(function( student ) {
       return student.batch == batchNr;
     });
 
-    // console.log(batchStudents)
     this.pickStudent(batchStudents)
   }
 
   checkIfEmpty(batchStudents, color){
-  //  console.log("studentje", student.currentColor)
-  var rednr = 0
-  batchStudents.map((student) =>{
+    var rednr = 0
+    batchStudents.map((student) =>{
+      if (student.currentColor === "red") {
+        return rednr ++
+      }
+    })
 
-    if (student.currentColor === "red") {
-      return rednr ++
+    var greennr = 0
+    batchStudents.map((student) =>{
+      if (student.currentColor === "green") {
+        return greennr ++
+      }
+    })
+
+    var yellownr = 0
+    batchStudents.map((student) =>{
+      if (student.currentColor === "yellow") {
+        return yellownr ++
+      }
+    })
+
+    if (color === "red" && rednr === 0 ) {
+      this.pickStudent(batchStudents)
+    }
+    if (color === "yellow" && yellownr === 0) {
+      this.pickStudent(batchStudents)
+    }
+    if (color === "green" && greennr === 0) {
+      this.pickStudent(batchStudents)
     }
 
-  })
-
-  var greennr = 0
-  batchStudents.map((student) =>{
-
-    if (student.currentColor === "green") {
-      return greennr ++
-    }
-
-  })
-
-  var yellownr = 0
-  batchStudents.map((student) =>{
-
-    if (student.currentColor === "yellow") {
-      return yellownr ++
-    }
-
-  })
-
-  if (color === "red" && rednr === 0 ) {
-    this.pickStudent(batchStudents)
+    return batchStudents
   }
-  if (color === "yellow" && yellownr === 0) {
-    this.pickStudent(batchStudents)
-  }
-  if (color === "green" && greennr === 0) {
-    this.pickStudent(batchStudents)
-  }
-
-
-
-
-
-console.log("green", greennr)
-console.log("red", rednr)
- console.log("yellow", yellownr)
-  // if (students.length === 0) {
-  //   return this.pickStudent(students)
-  // } else {
-  //   return students
-  // }
-  return batchStudents
-}
 
 
   pickStudent(batchStudents){

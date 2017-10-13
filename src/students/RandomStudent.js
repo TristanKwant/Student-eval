@@ -1,17 +1,12 @@
 
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import Student from './Student'
 import './RandomStudent.css'
 
 
 export class RandomStudent extends PureComponent {
-  static propTypes = {
-    _id: PropTypes.string.isRequired,
 
-  }
 
 
   render() {

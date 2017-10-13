@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fetchBatch from '../actions/batch/fetch.js'
 import Batch from './Batch.js'
 import { Link } from 'react-router'
 
 class BatchContainer extends Component {
-  static propTypes = {
-    students: PropTypes.array.isRequired,
-    fetchStudents: PropTypes.func.isRequired,
-  }
+
 
   componentWillMount() {
       this.props.fetchBatch()

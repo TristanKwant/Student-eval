@@ -52,19 +52,19 @@ class StudentEvaluator extends PureComponent {
 
     const days =content.days.filter((day) =>{
       if (day.day === this.state.date) {
-        console.log("the day ", day)
         return true
       }
-      return false
-    })
-    if (days.length !== 0) {
-      return false
-    }else {
-      return true
-    }
+        return false
+      })
 
+      if (days.length !== 0) {
+        return false
+      }else {
+        return true
+      }
 
   }
+
   validateComment() {
     const { comment } = this.state
     return comment && toMarkdown(comment).length > 2
@@ -73,11 +73,11 @@ class StudentEvaluator extends PureComponent {
   validate() {
     const isDateValid = this.validateDate()
     const isCommentValid = this.validateComment()
-    console.log(isDateValid, isCommentValid )
     return isDateValid && isCommentValid
   }
+
   updateDate(event){
-    const { content } = this.props
+
     this.setState({
       date: event.target.value
     })
@@ -87,7 +87,7 @@ class StudentEvaluator extends PureComponent {
 
 
   setType(event) {
-    // console.log(event.target.value ===)
+
     this.setState({
       green: event.target.value === 'green',
       yellow: event.target.value === 'yellow',
@@ -108,26 +108,24 @@ class StudentEvaluator extends PureComponent {
     } = this.state
 
     const evaluation = {
-      green,
-      comment: toMarkdown(comment),
-      yellow,
-      red,
-      date
-    }
+        green,
+        comment: toMarkdown(comment),
+        yellow,
+        red,
+        date
+      }
 
      this.props.save(content._id, evaluation)
 
-    console.log(evaluation)
 
-    this.setState({
+      this.setState({
 
-      green: null,
-      yellow: null,
-      red: null
-    })
-    // console.log(batch._id)
-    history.push(`/batch/${currentBatch[0]._id}`)
-  }
+        green: null,
+        yellow: null,
+        red: null
+      })
+      history.push(`/batch/${currentBatch[0]._id}`)
+    }
 
   getDate(){
     var today = new Date();
@@ -148,9 +146,6 @@ class StudentEvaluator extends PureComponent {
   }
 
   render() {
-    const { content } = this.props
-
-
     return (
       <div className="editor">
 
