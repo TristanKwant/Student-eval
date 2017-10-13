@@ -15,7 +15,7 @@ export class Batch extends PureComponent {
 
 
   render() {
-    const { _id, number } = this.props
+    const { _id, number, startDate, endDate } = this.props
 
     return(
       <article className="batches">
@@ -25,6 +25,8 @@ export class Batch extends PureComponent {
           <h1>
             <Link to={`/batch/${_id}`}>Batch: { number }</Link>
           </h1>
+          <h2>start date: {startDate}</h2>
+          <h2>end date: {endDate}</h2>
 
 
         </header>

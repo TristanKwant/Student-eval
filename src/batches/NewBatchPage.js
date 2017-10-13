@@ -13,16 +13,13 @@ class BatchPage extends PureComponent {
     super()
 
     this.state = {
-      number: 0
+      number: 0,
+      startDate: '',
+      endDate: ''
 
     }
   }
 
-
-
-  componentWillMount() {
-
-    }
 
     updateNumber(event) {
       this.setState({
@@ -30,20 +27,37 @@ class BatchPage extends PureComponent {
       })
     }
 
+    updateStartDate(event){
+      this.setState({
+        startDate: event.target.value
+      })
+
+    }
+    updateEndDate(event){
+      this.setState({
+        endDate: event.target.value
+      })
+
+    }
+
     saveBatch() {
 
 
     const {
-      number
+      number,
+      startDate,
+      endDate
     } = this.state
 
     const batch = {
-      number
+      number,
+      startDate,
+      endDate
     }
 
     this.props.save(batch)
     history.push('/')
-    
+
  }
 
   render() {
@@ -65,7 +79,7 @@ class BatchPage extends PureComponent {
             type="date"
             ref="photo"
             className="photo"
-            placeholder="Batch number"
+            onChange={this.updateStartDate.bind(this)}
             />
           </label>
           <label>
@@ -74,7 +88,8 @@ class BatchPage extends PureComponent {
             type="date"
             ref="photo"
             className="photo"
-            placeholder="Batch number"/>
+            onChange={this.updateEndDate.bind(this)}
+            />
           </label>
 
           <div className="actions">
